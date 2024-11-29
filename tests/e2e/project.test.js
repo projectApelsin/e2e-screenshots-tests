@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('Перевірка заголовка сторінки', async ({ page }) => {
   await page.goto('/');
-  await expect(page).toHaveTitle(/Мій тестовий сайт/);
+  await expect(page).toHaveTitle(/Ласкаво просимо до тестового проєкту/);
 });
 
 test('Перевірка наявності тексту на сторінці', async ({ page }) => {
