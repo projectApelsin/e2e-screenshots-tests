@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('Скріншот всієї сторінки', async ({ page }) => {
   await page.goto('/');
-  expect(await page.screenshot()).toMatchSnapshot('home-page.png', { threshold: 0.3 });
+  expect(await page.screenshot()).toMatchSnapshot('home-page.png', { threshold: 0.2 });
 });
 
 test('Скріншот заголовка сторінки', async ({ page }) => {
