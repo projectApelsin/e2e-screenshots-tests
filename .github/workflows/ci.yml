@@ -24,10 +24,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Grant execute permissions for playwright globally
+        run: chmod +x ./node_modules/.bin/playwright
+
       - name: Install Playwright browsers
         run: npx playwright install
 
-      - name: Grant execute permissions for playwright
+      - name: Grant execute permissions for playwright after install
         run: chmod +x ./node_modules/.bin/playwright
 
       - name: Run Playwright tests
