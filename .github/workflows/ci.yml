@@ -24,12 +24,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Дозвіл для playwright перед інсталяцією
       - name: Grant execute permissions for playwright globally
         run: chmod +x ./node_modules/.bin/playwright
 
       - name: Install Playwright browsers
         run: npx playwright install
 
+      # Дозвіл для http-server перед запуском
+      - name: Grant execute permissions for http-server globally
+        run: chmod +x ./node_modules/.bin/http-server
+
+      # Дозвіл для playwright після інсталяції
       - name: Grant execute permissions for playwright after install
         run: chmod +x ./node_modules/.bin/playwright
 
