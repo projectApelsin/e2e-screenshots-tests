@@ -21,22 +21,25 @@ jobs:
       with:
         node-version: '20.x'
 
-    - name: Install dependencies
+    - name: Locate package.json
       run: |
-        cd project || exit 1
         if [ -f package.json ]; then
-          npm install
+          echo "package.json found in root"
+          export PROJECT_DIR="."
+        elif [ -f project/package.json ]; then
+          echo "package.json found in project/"
+          export PROJECT_DIR="project"
         else
           echo "Error: package.json not found!"
           exit 1
         fi
 
+    - name: Install dependencies
+      run: |
+        cd $PROJECT_DIR
+        npm install
+
     - name: Run tests
       run: |
-        cd project || exit 1
-        if [ -f package.json ]; then
-          npm test
-        else
-          echo "Error: Cannot run tests without package.json!"
-          exit 1
-        fi
+        cd $PROJECT_DIR
+        npm test
