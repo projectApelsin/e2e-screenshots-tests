@@ -8,5 +8,5 @@ test('Перевірка заголовка сторінки', async ({ page }) 
 test('Перевірка наявності тексту на сторінці', async ({ page }) => {
   await page.goto('/');
   const content = await page.textContent('h1');
-  expect(content).toContain('Ласкаво просимо до тестового проєкту');
+  expect(content).toContain('Це тестовий текст для перевірки.');
 });
