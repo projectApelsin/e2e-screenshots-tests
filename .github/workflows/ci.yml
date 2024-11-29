@@ -23,6 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        cd project || exit 1
         if [ -f package.json ]; then
           npm install
         else
@@ -32,6 +33,7 @@ jobs:
 
     - name: Run tests
       run: |
+        cd project || exit 1
         if [ -f package.json ]; then
           npm test
         else
