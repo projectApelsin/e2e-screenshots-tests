@@ -13,28 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
 
-    - name: Install dependencies
-      run: |
-        if [ -f package.json ]; then
-          npm install
-        else
-          echo "Error: package.json not found!"
-          exit 1
-        fi
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: |
-        if [ -f package.json ]; then
-          npm test
-        else
-          echo "Error: Cannot run tests without package.json!"
-          exit 1
-        fi
+      - name: Install Playwright browsers
+        run: npx playwright install
+
+      - name: Grant execute permissions for playwright
+        run: chmod +x ./node_modules/.bin/playwright
+
+      - name: Run Playwright tests
+        run: npx playwright test
