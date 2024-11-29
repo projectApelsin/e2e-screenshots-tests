@@ -1,0 +1,45 @@
+name: Lab CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Locate package.json
+      run: |
+        if [ -f package.json ]; then
+          echo "package.json found in root"
+          export PROJECT_DIR="."
+        elif [ -f project/package.json ]; then
+          echo "package.json found in project/"
+          export PROJECT_DIR="project"
+        else
+          echo "Error: package.json not found!"
+          exit 1
+        fi
+
+    - name: Install dependencies
+      run: |
+        cd $PROJECT_DIR
+        npm install
+
+    - name: Run tests
+      run: |
+        cd $PROJECT_DIR
+        npm test
