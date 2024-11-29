@@ -1,1 +1,1 @@
-# e2e-screenshots-tests
+# simple-tests
